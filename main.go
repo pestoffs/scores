@@ -12,7 +12,8 @@ import (
 )
 
 func main() {
-	WriteRecord()
+
+	WriteRecord("venya", 50)
 
 	fmt.Println("End" + " " + "User")
 }
