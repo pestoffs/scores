@@ -14,6 +14,14 @@ import (
 func main() {
 
 	WriteRecord("venya", 50)
+	WriteRecord("venya", 504444)
 
-	fmt.Println("End" + " " + "User")
+	fmt.Println("End of adding records")
+
+	err := ReadRecord("test.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("End of printing file")
 }
