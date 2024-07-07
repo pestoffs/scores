@@ -8,18 +8,15 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
+	"strings"
 )
 
 func main() {
 
-	WriteRecord("Emil", 45)
-	WriteRecord("venya", 50)
-	WriteRecord("venya", 504444)
-
-	fmt.Println("End of adding records")
-
-	err := ReadRecord("test.txt")
+	/* err := ReadRecord("test.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -40,5 +37,54 @@ func main() {
 		fmt.Print(err)
 	}
 
-	fmt.Println("User score: ", score)
+	fmt.Println("User score: ", score) */
+
+	//Define CLI commands and flags
+	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
+
+	var userScore string
+	addCmd.StringVar(&userScore, "record", "", "User and score in format user:score")
+
+	//TODO: Parse CLI arguments
+	/* if len(os.Args)<2{
+		fmt.Println("expected 'add' command")
+		os.Exit(1)
+	} */
+
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "add":
+			addCmd.Parse(os.Args[2:])
+		default:
+			flag.PrintDefaults()
+			os.Exit(1)
+		}
+	}
+
+	// Execute add command
+	if addCmd.Parsed() {
+		if userScore == "" {
+			addCmd.PrintDefaults()
+			os.Exit(1)
+		}
+		parts := strings.Split(userScore, ":")
+		if len(parts) != 2 {
+			fmt.Println("Invalid format. Expected user:score")
+			os.Exit(1)
+		}
+		user := parts[0]
+		var score int
+		_, err := fmt.Sscanf(parts[1], "%d", &score)
+		if err != nil {
+			fmt.Println("Invalid score format")
+			os.Exit(1)
+		}
+		err = WriteRecord(user, score)
+		if err != nil {
+			fmt.Println("Error writing record:", err)
+		} else {
+			fmt.Println("Record added successfully")
+		}
+	}
+
 }
