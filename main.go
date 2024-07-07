@@ -13,6 +13,7 @@ import (
 
 func main() {
 
+	WriteRecord("Emil", 45)
 	WriteRecord("venya", 50)
 	WriteRecord("venya", 504444)
 
@@ -24,4 +25,20 @@ func main() {
 	}
 
 	fmt.Println("End of printing file")
+
+	fmt.Println("Find Venya score")
+	score, err := findUserScore("test.txt", "venya")
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	fmt.Println("User score: ", score)
+
+	fmt.Println("Find Emil score")
+	score, err = findUserScore("test.txt", "Emil")
+	if err != nil {
+		fmt.Print(err)
+	}
+
+	fmt.Println("User score: ", score)
 }
