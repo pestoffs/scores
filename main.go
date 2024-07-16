@@ -15,12 +15,13 @@ import (
 )
 
 func main() {
+	score, _ := findUserScore("test.txt", "venya")
+	fmt.Println(score)
 
-	/* err := ReadRecord("test.txt")
+	/*err := ReadRecord("test.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	fmt.Println("End of printing file")
 
 	fmt.Println("Find Venya score")
@@ -79,7 +80,7 @@ func main() {
 			fmt.Println("Invalid score format")
 			os.Exit(1)
 		}
-		err = WriteRecord(user, score)
+		err = WriteRecord(createNewTableScores(user, score))
 		if err != nil {
 			fmt.Println("Error writing record:", err)
 		} else {
