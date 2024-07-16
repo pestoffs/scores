@@ -7,8 +7,10 @@ import (
 	"strings"
 )
 
+const names string = "test.txt"
+
 func WriteRecord(user string, score int) error {
-	file, err := os.OpenFile("test.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(names, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Print(err.Error())
 		return err
