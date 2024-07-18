@@ -15,8 +15,9 @@ import (
 )
 
 func main() {
-	score, _ := findUserScore("test.txt", "venya")
-	fmt.Println(score)
+	venya := CreateNewUserScores("venya", 500)
+	//score, _ := UserScores.findUserScore(CreateNewUserScores("venya", 500))
+	fmt.Println(venya.ReadRecord())
 
 	/*err := ReadRecord("test.txt")
 	if err != nil {
@@ -73,14 +74,13 @@ func main() {
 			fmt.Println("Invalid format. Expected user:score")
 			os.Exit(1)
 		}
-		user := parts[0]
-		var score int
-		_, err := fmt.Sscanf(parts[1], "%d", &score)
+		user := CreateNewUserScores(parts[0], 0)
+		_, err := fmt.Sscanf(parts[1], "%d", &user.score)
 		if err != nil {
 			fmt.Println("Invalid score format")
 			os.Exit(1)
 		}
-		err = WriteRecord(createNewTableScores(user, score))
+		err = user.WriteRecord()
 		if err != nil {
 			fmt.Println("Error writing record:", err)
 		} else {
