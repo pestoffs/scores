@@ -14,32 +14,10 @@ import (
 	"strings"
 )
 
+// TODO: добавить использование FindUserScore
 func main() {
-	venya := CreateNewUserScores("venya", 500)
-	//score, _ := UserScores.findUserScore(CreateNewUserScores("venya", 500))
+	venya := NewUserScore("venya", 500)
 	fmt.Println(venya.ReadRecord())
-
-	/*err := ReadRecord("test.txt")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("End of printing file")
-
-	fmt.Println("Find Venya score")
-	score, err := findUserScore("test.txt", "venya")
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	fmt.Println("User score: ", score)
-
-	fmt.Println("Find Emil score")
-	score, err = findUserScore("test.txt", "Emil")
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	fmt.Println("User score: ", score) */
 
 	//Define CLI commands and flags
 	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
@@ -74,7 +52,7 @@ func main() {
 			fmt.Println("Invalid format. Expected user:score")
 			os.Exit(1)
 		}
-		user := CreateNewUserScores(parts[0], 0)
+		user := NewUserScore(parts[0], 0)
 		_, err := fmt.Sscanf(parts[1], "%d", &user.score)
 		if err != nil {
 			fmt.Println("Invalid score format")

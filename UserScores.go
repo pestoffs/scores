@@ -4,23 +4,22 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
 
-type UserScores struct {
+type UserScore struct {
 	name  string
 	score int
 }
 
-func CreateNewUserScores(name string, score int) *UserScores {
-	user := UserScores{
+func NewUserScore(name string, score int) *UserScore {
+	user := UserScore{
 		name:  name,
 		score: score,
 	}
 	return &user
 }
 
-func (u *UserScores) WriteRecord() error {
+func (u *UserScore) WriteRecord() error {
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Print(err.Error())
@@ -37,7 +36,8 @@ func (u *UserScores) WriteRecord() error {
 	return nil
 }
 
-func (u *UserScores) ReadRecord() error {
+// TODO: возвращать значения структуры user и score
+func (u *UserScore) ReadRecord() error {
 	file, err := os.Open(path)
 	if err != nil {
 		return err
@@ -51,10 +51,12 @@ func (u *UserScores) ReadRecord() error {
 	return scanner.Err()
 }
 
-func (u *UserScores) findUserScore() (int, error) {
-	file, err := os.Open(path)
+// TODO: Сделать функцию(!),а не метод,которая будет находить по user строку в файле
+// и возвращать в виде обьекта (используя конструктор)
+func FindUserScore(name string) (*UserScore, error) {
+	/* file, err := os.Open(path)
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
 	defer file.Close()
 
@@ -71,5 +73,7 @@ func (u *UserScores) findUserScore() (int, error) {
 	if err := scanner.Err(); err != nil {
 		return 0, err
 	}
-	return 0, fmt.Errorf("user not found")
+	return 0, fmt.Errorf("user not found") */
+
+	return nil, nil
 }
