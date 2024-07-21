@@ -15,6 +15,7 @@ import (
 )
 
 // TODO: добавить использование FindUserScore
+// Добав
 func main() {
 	venya := NewUserScore("venya", 500)
 	fmt.Println(venya.ReadRecord())
